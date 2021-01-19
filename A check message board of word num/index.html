@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>留言板文字计数</title>
+</head>
+<body>
+  <div>
+      <textarea cols="50" rows="5"  name="content" id="content" onkeyup="javascript:checkWords(this);"
+          onmousedown="javascript:checkWords(this);">
+        </textarea>
+  </div>
+  <div>
+      还可以输入<span style="font-family: Georgia; font-size: 26px;" id="wordCheck">50</span>个汉字
+  </div>
+
+  <script>
+      var maxStrLength = 50;
+      function Q(s) {
+          return document.getElementById(s);
+      }
+      function checkWords(c) {
+          len = maxStrLength;
+          var str = c.value;
+          myLen = getStrLength(str);
+          var wck = Q("wordCheck");
+          if (myLen > len * 2) {
+              c.value = str.substring(0, i + 1);
+          } else {
+              wck.innerHTML = Math.floor((len * 2 - myLen) / 2);
+          }
+      }
+      function getStrLeng(str) {
+          myLen = 0;
+          i = 0;
+          for (; (i < str.length) && (myLen <= maxStrLength * 2); i++) {
+              if (str.charCodeAt(i) > 0 && str.charCodeAt(i) < 128)
+                  myLen++;
+              else
+                  myLen += 2;
+          }
+          return myLen;
+      }
+  </script>
+</body>
+
+</html>
